@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
-import { App } from '@capacitor/app';
+import { Geolocation } from '@capacitor/geolocation';
 
 const Index = () => {
   const [gateway, setGateway] = useState<string | null>(null);
@@ -14,11 +14,8 @@ const Index = () => {
 
   const requestPermissions = async () => {
     try {
-      // Em um dispositivo real, isso solicitará as permissões necessárias
-      // Note que algumas permissões precisam ser solicitadas em tempo de execução
-      await App.requestPermissions({
-        permissions: ["location"]
-      });
+      // Request location permission which is needed for WiFi information
+      await Geolocation.requestPermissions();
     } catch (error) {
       console.error('Erro ao solicitar permissões:', error);
     }
